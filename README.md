@@ -5,7 +5,7 @@ A personal collection of AI prompts, operating modes, and rules designed to stre
 ## 📁 Project Structure
 
 - `commands/`: Markdown-based command definitions (e.g., `spec-assistant.md`) for use with slash commands.
-- `skills/`: Agent Skills that can be installed in Cursor or Claude Desktop for automatic activation.
+- `skills/`: Agent Skills that can be installed in Cursor, VS Code (GitHub Copilot), or Claude Desktop for automatic activation.
   - `spec-assistant/`: A collaborative spec-building assistant that guides spec-driven development.
 
 ## 🚀 Installation
@@ -62,6 +62,65 @@ After installation (Options 2-4), restart Cursor. The skill will be automaticall
 **Viewing installed skills:**
 - Open **Cursor Settings** → **Rules**
 - Skills appear in the **Agent Decides** section
+
+### For VS Code (GitHub Copilot)
+
+**Note:** Agent Skills support in VS Code is currently in preview. Enable the `chat.useAgentSkills` setting to use Agent Skills.
+
+**Option 1: Install as a project skill (Recommended)**
+
+Install the skill in your workspace so it's available for all team members:
+
+```bash
+# Clone the repository
+git clone https://github.com/harshilparmar/ai-coding-standards.git
+
+# Copy the skill to your project's .github/skills directory
+mkdir -p .github/skills
+cp -r ai-coding-standards/skills/spec-assistant .github/skills/
+```
+
+**Option 2: Install as a personal skill**
+
+Install the skill in your user profile for use across all projects:
+
+```bash
+# Clone the repository
+git clone https://github.com/harshilparmar/ai-coding-standards.git
+
+# Copy the skill to your personal skills directory
+mkdir -p ~/.copilot/skills
+cp -r ai-coding-standards/skills/spec-assistant ~/.copilot/skills/
+```
+
+**Option 3: Clone directly to skills directory**
+
+```bash
+# For project-level installation
+mkdir -p .github/skills
+cd .github/skills
+git clone https://github.com/harshilparmar/ai-coding-standards.git temp-repo
+cp -r temp-repo/skills/spec-assistant .
+rm -rf temp-repo
+
+# Or for user-level installation
+mkdir -p ~/.copilot/skills
+cd ~/.copilot/skills
+git clone https://github.com/harshilparmar/ai-coding-standards.git temp-repo
+cp -r temp-repo/skills/spec-assistant .
+rm -rf temp-repo
+```
+
+**Enable Agent Skills in VS Code:**
+
+1. Open VS Code Settings (`Cmd+,` on Mac, `Ctrl+,` on Windows/Linux)
+2. Search for `chat.useAgentSkills`
+3. Enable the setting: **"Chat: Use Agent Skills"**
+4. Restart VS Code
+
+**Legacy compatibility:** VS Code also supports skills in `.claude/skills/` (project-level) or `~/.claude/skills/` (user-level) for backward compatibility.
+
+For more details, see the [official VS Code documentation on Agent Skills](https://code.visualstudio.com/docs/copilot/customization/agent-skills#_create-a-skill).
 
 ### For Claude Desktop
 
@@ -122,5 +181,3 @@ Once installed, the `spec-assistant` skill activates automatically when you ment
 
 See [`skills/spec-assistant/QUICK_START.md`](skills/spec-assistant/QUICK_START.md) for detailed usage instructions.
 
----
-*Note: This repository is a living document of best practices for AI-assisted software engineering.*
